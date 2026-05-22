@@ -1,0 +1,5 @@
+venv
+lab_requirement
+__pycache__/
+*.py[cod]
+src/__pycache__/
