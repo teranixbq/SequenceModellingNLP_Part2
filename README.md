@@ -12,7 +12,7 @@ Implementasi Lab Assignment 2 untuk materi sequence modelling NLP:
 - `lab_requirement/`: file PDF soal.
 - `src/task1_text_generator.py`: kode Task 1, Simple RNN vs LSTM text generator.
 - `src/task2_seq2seq.py`: kode wajib Task 2 dan Task 3.
-- `src/bonus.py`: kode bonus beam search dan pointer-generator.
+- `src/optional_task.py`: kode bonus beam search dan pointer-generator.
 - `src/common.py`: helper umum seperti seed, vocabulary, BLEU, perplexity.
 - `src/sample_data.py`: data contoh dan loader dataset publik.
 - `main.ipynb`: notebook utama untuk training, evaluasi, dan visualisasi.

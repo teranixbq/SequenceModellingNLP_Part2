@@ -234,6 +234,9 @@ class Seq2SeqModel(nn.Module):
 
 
 def build_seq2seq_model(source_token_to_id, target_token_to_id, embedding_size=64, hidden_size=128, decoder_type="attention"):
+    if decoder_type not in {"basic", "attention"}:
+        raise ValueError("decoder_type must be 'basic' or 'attention'. Use src.optional_task for pointer-generator.")
+
     use_attention = decoder_type == "attention"
     encoder = Encoder(len(source_token_to_id), embedding_size, hidden_size, source_token_to_id[PAD_TOKEN])
     decoder = Decoder(len(target_token_to_id), embedding_size, hidden_size, target_token_to_id[PAD_TOKEN], use_attention)

@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from .common import EOS_TOKEN, PAD_TOKEN, SOS_TOKEN, UNK_TOKEN, decode_ids, encode_tokens, tokenize
-from .task2_seq2seq import Encoder, Seq2SeqModel
+from .task2_seq2seq import Attention, Encoder, Seq2SeqModel
 
 
 class PointerGeneratorDecoder(nn.Module):
@@ -17,24 +17,14 @@ class PointerGeneratorDecoder(nn.Module):
         self.hidden_size = hidden_size
         self.unk_id = unk_id
         self.embedding = nn.Embedding(vocab_size, embedding_size, padding_idx=pad_id)
-        self.attention_layer = nn.Linear(hidden_size * 3, hidden_size)
-        self.score_layer = nn.Linear(hidden_size, 1, bias=False)
+        self.attention = Attention(hidden_size * 2, hidden_size)
         self.lstm = nn.LSTM(embedding_size + hidden_size * 2, hidden_size, batch_first=True)
         self.output_layer = nn.Linear(embedding_size + hidden_size * 3, vocab_size)
         self.pointer_gate = nn.Linear(embedding_size + hidden_size * 3, 1)
 
-    def attention(self, hidden, encoder_outputs, source_mask):
-        source_length = encoder_outputs.size(1)
-        repeated_hidden = hidden[-1].unsqueeze(1).repeat(1, source_length, 1)
-        energy = torch.tanh(self.attention_layer(torch.cat([repeated_hidden, encoder_outputs], dim=-1)))
-        scores = self.score_layer(energy).squeeze(-1).masked_fill(~source_mask, -1e9)
-        weights = F.softmax(scores, dim=-1)
-        context = torch.bmm(weights.unsqueeze(1), encoder_outputs).squeeze(1)
-        return context, weights
-
     def forward(self, input_token, hidden, cell, encoder_outputs, source_mask, source_copy_ids):
         embedded = self.embedding(input_token.unsqueeze(1))
-        context, attention_weights = self.attention(hidden, encoder_outputs, source_mask)
+        context, attention_weights = self.attention(hidden[-1], encoder_outputs, source_mask)
         decoder_output, (hidden, cell) = self.lstm(torch.cat([embedded, context.unsqueeze(1)], dim=-1), (hidden, cell))
         output_input = torch.cat([embedded.squeeze(1), decoder_output.squeeze(1), context], dim=-1)
 
