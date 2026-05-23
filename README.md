@@ -15,7 +15,7 @@ Implementasi Lab Assignment 2 untuk materi sequence modelling NLP:
 - `src/common.py`: helper umum seperti seed, vocabulary, BLEU, perplexity.
 - `src/sample_data.py`: data contoh dan loader dataset publik.
 - `main.ipynb`: notebook utama untuk training, evaluasi, dan visualisasi.
-- `requirements.txt`: dependency Python.
+- `requirements.txt`: dependency minimal untuk local environment.
 
 ## Setup
 
@@ -39,6 +39,8 @@ Notebook akan menampilkan:
 - heatmap attention untuk 3 sample sentences.
 - bonus beam search decoding,
 - bonus pointer-generator network.
+
+Setup cell di notebook otomatis skip kalau dijalankan lokal, jadi folder `src` lokal tidak tertimpa. Di Google Colab, cell tersebut mengambil `src` dari GitHub dan install `sacrebleu` karena PyTorch dan matplotlib biasanya sudah tersedia.
 
 ## Dataset Publik
 
