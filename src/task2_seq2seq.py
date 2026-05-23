@@ -35,14 +35,13 @@ def split_pairs(sentence_pairs: Sequence[tuple[str, str]], train_ratio: float = 
 
 def build_translation_data(sentence_pairs: Sequence[tuple[str, str]], train_ratio: float = 0.85, seed: int = 42):
     train_pairs, test_pairs = split_pairs(sentence_pairs, train_ratio, seed)
-    source_token_to_id, source_id_to_token = build_vocab([tokenize(source) for source, _ in train_pairs])
+    source_token_to_id, _ = build_vocab([tokenize(source) for source, _ in train_pairs])
     target_token_to_id, target_id_to_token = build_vocab([tokenize(target) for _, target in train_pairs])
 
     return {
         "train_pairs": train_pairs,
         "test_pairs": test_pairs,
         "source_token_to_id": source_token_to_id,
-        "source_id_to_token": source_id_to_token,
         "target_token_to_id": target_token_to_id,
         "target_id_to_token": target_id_to_token,
         "copy_map": build_copy_map(source_token_to_id, target_token_to_id),

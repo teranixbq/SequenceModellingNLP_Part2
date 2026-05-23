@@ -30,15 +30,7 @@ make install
 
 ## Menjalankan Notebook
 
-```bash
-jupyter notebook main.ipynb
-```
-
-Atau:
-
-```bash
-make notebook
-```
+Buka `main.ipynb` melalui Google Colab, Jupyter dari conda, VS Code, atau notebook runner lain yang sudah tersedia di environment kamu.
 
 Notebook akan menampilkan:
 
