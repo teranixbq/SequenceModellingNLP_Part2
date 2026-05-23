@@ -3,7 +3,7 @@
 Implementasi Lab Assignment 2 untuk materi sequence modelling NLP:
 
 - Task 1: Simple RNN vs LSTM character-level text generator.
-- Task 2: Encoder-decoder LSTM untuk English-Indonesian translation.
+- Task 2: Encoder-decoder LSTM untuk text summarization memakai IndoSum.
 - Task 3: Bahdanau additive attention dan visualisasi attention weights.
 - Task 4: catatan report dan analisis bisa dibuat terakhir dari angka notebook.
 
@@ -13,7 +13,7 @@ Implementasi Lab Assignment 2 untuk materi sequence modelling NLP:
 - `src/task2_seq2seq.py`: kode wajib Task 2 dan Task 3.
 - `src/optional_task.py`: kode bonus beam search dan pointer-generator.
 - `src/common.py`: helper umum seperti seed, vocabulary, BLEU, perplexity.
-- `src/sample_data.py`: data contoh dan loader dataset publik.
+- `src/sample_data.py`: data contoh untuk Task 1.
 - `main.ipynb`: notebook utama untuk training, evaluasi, dan visualisasi.
 - `requirements.txt`: dependency minimal untuk local environment.
 
@@ -35,22 +35,20 @@ Notebook akan menampilkan:
 
 - generated text minimal 100 karakter dari Simple RNN dan LSTM,
 - perplexity untuk perbandingan Simple RNN vs LSTM,
-- BLEU sederhana untuk encoder-decoder tanpa attention dan dengan attention,
+- BLEU sederhana untuk encoder-decoder summarization tanpa attention dan dengan attention,
 - heatmap attention untuk 3 sample sentences.
 - bonus beam search decoding,
 - bonus pointer-generator network.
 
-Setup cell di notebook otomatis skip kalau dijalankan lokal, jadi folder `src` lokal tidak tertimpa. Di Google Colab, cell tersebut mengambil `src` dari GitHub dan install `sacrebleu` karena PyTorch dan matplotlib biasanya sudah tersedia.
+Setup cell di notebook otomatis skip kalau dijalankan lokal, jadi folder `src` lokal tidak tertimpa. Di Google Colab, cell tersebut mengambil `src` dari GitHub dan install `sacrebleu` serta `kagglehub`.
 
 ## Dataset Publik
 
-Notebook menyediakan 3 opsi:
+Notebook memakai dataset:
 
-1. `load_talpco_pairs_from_github()` untuk mengambil English-Indonesian dari GitHub TALPCo.
-2. `SMALL_TRANSLATION_PAIRS` hanya fallback/debug cepat.
-3. `load_csv_pairs()` untuk CSV dari Kaggle/Mendeley, misalnya dataset dengan kolom `english` dan `indonesia`.
-
-Default di notebook adalah TALPCo dari GitHub, bukan Hugging Face, karena tidak perlu login Kaggle dan tidak perlu library `datasets`.
+1. IndoSum dari Kaggle: `linkgish/indosum`.
+2. Dataset di-load langsung di `main.ipynb` memakai `kagglehub`, bukan di file Python `src`.
+3. Artikel dipakai sebagai source sequence, ringkasan dipakai sebagai target sequence.
 
 ## Catatan Starter Code
 
@@ -64,4 +62,4 @@ Beberapa bagian ditambahkan agar bisa jalan end-to-end di notebook: dataloader, 
 
 ## Catatan Eksperimen
 
-Dataset kecil bawaan hanya untuk debug cepat. Untuk hasil report yang lebih kuat, pakai `load_talpco_pairs_from_github()` di Colab dan naikkan jumlah epoch di `main.ipynb`.
+Untuk hasil report yang lebih kuat, naikkan `max_samples` pada loader IndoSum di `main.ipynb` jika runtime Colab masih kuat.
