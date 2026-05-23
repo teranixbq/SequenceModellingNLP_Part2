@@ -29,3 +29,22 @@ File → Open Notebook → GitHub → Salin link repo ini
 Notebook memakai dataset:
 
 1. TALPCo dari GitHub: `matbahasa/TALPCo`  https://github.com/matbahasa/TALPCo
+
+## Evaluasi
+
+Evaluasi dilakukan langsung di `main.ipynb` setelah training selesai. Metric yang digunakan:
+
+- Perplexity untuk membandingkan Simple RNN dan LSTM pada Task 1.
+- BLEU score untuk membandingkan Encoder-Decoder tanpa Attention dan dengan Attention pada Task 2 dan Task 3.
+- Attention heatmap untuk melihat kata source yang diperhatikan decoder.
+- Beam Search dievaluasi secara kualitatif dengan membandingkan output greedy decoding dan beam decoding.
+- Final loss untuk model bonus Pointer-Generator.
+
+Hasil eksperimen terakhir:
+
+| Eksperimen | Metric | Hasil |
+|---|---:|---:|
+| Simple RNN Text Generator | Perplexity | 1.12 |
+| LSTM Text Generator | Perplexity | 1.11 |
+| Encoder-Decoder tanpa Attention | BLEU | 7.34 |
+| Encoder-Decoder dengan Attention | BLEU | 10.81 |
