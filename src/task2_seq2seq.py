@@ -1,18 +1,3 @@
-"""Task 2 dan Task 3: Encoder-Decoder LSTM + Bahdanau Attention.
-
-Base arsitektur mengikuti starter code dari PDF dosen:
-
-- `Encoder`: embedding + bidirectional `nn.LSTM` + `pack_padded_sequence`.
-- `Attention`: additive/Bahdanau attention.
-- `Decoder`: embedding + LSTM decoder + attention + linear output.
-
-Yang ditambahkan dari starter:
-
-- vocabulary dan dataloader sederhana,
-- source mask agar attention tidak melihat padding,
-- wrapper `Seq2SeqModel` untuk teacher forcing dan greedy decoding.
-"""
-
 import random
 from functools import partial
 from typing import Sequence
