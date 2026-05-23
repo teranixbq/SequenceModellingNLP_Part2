@@ -3,7 +3,7 @@
 Implementasi Lab Assignment 2 untuk materi sequence modelling NLP:
 
 - Task 1: Simple RNN vs LSTM character-level text generator.
-- Task 2: Encoder-decoder LSTM untuk text summarization memakai IndoSum.
+- Task 2: Encoder-decoder LSTM untuk English-Indonesian translation memakai TALPCo.
 - Task 3: Bahdanau additive attention dan visualisasi attention weights.
 - Task 4: catatan report dan analisis bisa dibuat terakhir dari angka notebook.
 
@@ -35,20 +35,20 @@ Notebook akan menampilkan:
 
 - generated text minimal 100 karakter dari Simple RNN dan LSTM,
 - perplexity untuk perbandingan Simple RNN vs LSTM,
-- BLEU sederhana untuk encoder-decoder summarization tanpa attention dan dengan attention,
+- BLEU sederhana untuk encoder-decoder translation tanpa attention dan dengan attention,
 - heatmap attention untuk 3 sample sentences.
 - bonus beam search decoding,
 - bonus pointer-generator network.
 
-Setup cell di notebook otomatis skip kalau dijalankan lokal, jadi folder `src` lokal tidak tertimpa. Di Google Colab, cell tersebut mengambil `src` dari GitHub dan install `sacrebleu` serta `kagglehub`.
+Setup cell di notebook otomatis skip kalau dijalankan lokal, jadi folder `src` lokal tidak tertimpa. Di Google Colab, cell tersebut mengambil `src` dari GitHub dan install `sacrebleu`.
 
 ## Dataset Publik
 
 Notebook memakai dataset:
 
-1. IndoSum dari Kaggle: `linkgish/indosum`.
-2. Dataset di-load langsung di `main.ipynb` memakai `kagglehub`, bukan di file Python `src`.
-3. Artikel dipakai sebagai source sequence, ringkasan dipakai sebagai target sequence.
+1. TALPCo dari GitHub: `matbahasa/TALPCo`.
+2. Dataset di-load langsung di `main.ipynb`, bukan di file Python `src`.
+3. File English dan Indonesian dibaca dari raw GitHub, lalu angka ID di awal kalimat dibersihkan.
 
 ## Catatan Starter Code
 
@@ -62,4 +62,4 @@ Beberapa bagian ditambahkan agar bisa jalan end-to-end di notebook: dataloader, 
 
 ## Catatan Eksperimen
 
-Untuk hasil report yang lebih kuat, naikkan `max_samples` pada loader IndoSum di `main.ipynb` jika runtime Colab masih kuat.
+Untuk hasil report yang lebih kuat, naikkan `max_samples` pada loader TALPCo di `main.ipynb` jika runtime Colab masih kuat.
