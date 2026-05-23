@@ -9,7 +9,6 @@ Implementasi Lab Assignment 2 untuk materi sequence modelling NLP:
 
 ## Struktur
 
-- `lab_requirement/`: file PDF soal.
 - `src/task1_text_generator.py`: kode Task 1, Simple RNN vs LSTM text generator.
 - `src/task2_seq2seq.py`: kode wajib Task 2 dan Task 3.
 - `src/optional_task.py`: kode bonus beam search dan pointer-generator.
